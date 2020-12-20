@@ -1,0 +1,9 @@
+[example]
+curl -X POST --data-urlencode "payload={\"channel\": \"#slack-bot-side-project\", \"username\": \"webhookbot\", \"text\": \"hi!\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/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
+
+[실례]
+curl -X POST --data-urlencode "payload={\"channel\": \"#slack-bot-side-project\", \"text\": \"hi!\"}" https://hooks.slack.com/services/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
+curl -X POST -d 'payload={"text": "hi!"}' //{webhookurl}
+
+[web hook URL]
+https://hooks.slack.com/services/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
