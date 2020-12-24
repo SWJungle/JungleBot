@@ -2,8 +2,8 @@ from re import split
 import requests
 import time
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
 page = requests
@@ -11,14 +11,16 @@ page = requests
 def main() :
     print('check your request..')
     ## webhook url
-    webhook_url = "WEBHOOK-URL"
+    webhook_url = "webhook url"
     moonjicam_url = "https://www.kaist.ac.kr/kr/html/campus/053001.html?dvs_cd=icc"
     text = "Jungle Bot Text."
     title, breakfast, lunch, dinner = get_umsik(moonjicam_url)    
-    breakfast = " ".join(breakfast)
-    lunch = " ".join(lunch)
-    dinner = " ".join(dinner)
-    print(type(breakfast), type(lunch), type(dinner))
+    breakfast = " , ".join(breakfast)
+    lunch = " , ".join(lunch)
+    dinner = " , ".join(dinner)
+    messages = ["정글 여러분 오늘도 ~행복한~ 코딩해요. 👨‍💻",
+                "메리 크리스마스 Merry Christmas. ❄☃🌞",
+                ]
     payload = {
         # "text": title + " (<%s|Click here.>)\n " % moonjicam_url + breakfast + "\n" + lunch + "\n" + dinner  ,
         "blocks": [
@@ -26,36 +28,38 @@ def main() :
                 "type": "header",
                 "text": {
                     "type": "plain_text",
-                    "text": "🍚" + title,
+                    "text": "🍜 " + title, 
                     "emoji": True
                 }
             },
             {
+			    "type": "divider"
+		    },
+            {
                 "type": "section",
                 "text": {
+                    # {
+                    #     "type": "mrkdwn",
+                    #     "text": "*아침*\n" + breakfast +"\n\n*점심*\n" + lunch + "\n\n*저녁*\n" + dinner,
+                    # },
                     "type": "mrkdwn",
-                    "text": "오늘의 식단이에요. 개선 사항이 있으면 말씀해주세요 😁<*"+ moonjicam_url +"|this is a link> | <https://sunio00000.github.io/contact|contact me>*"
+                    "text": "*[ 아 침 ]*\n - " + breakfast +"\n\n*[ 점 심 ]*\n - " + lunch + "\n\n*[ 저 녁 ]*\n - " + dinner,
+                },
+                "accessory": {
+                    "type": "image",
+                    "image_url": "https://i.pinimg.com/236x/3f/08/7f/3f087fef430d0fc0c84a9984eec222d1.jpg",
+                    "alt_text": "맛없어도 먹어야해!"
                 }
             },
             {
+			    "type": "divider"
+		    },
+            {
                 "type": "section",
-                "fields": [
-                    {
-                        "type": "plain_text",
-                        "text": breakfast,
-                        "emoji": True
-                    },
-                    {
-                        "type": "plain_text",
-                        "text": lunch,
-                        "emoji": True
-                    },
-                    {
-                        "type": "plain_text",
-                        "text": dinner,
-                        "emoji": True
-                    },
-                ]
+                "text": {
+                    "type": "mrkdwn",
+                    "text": messages[0] + "  <"+ moonjicam_url +"|campus link > | <https://sunio00000.github.io/contact|contact me>"
+                }
             },
         ]
     }
@@ -66,8 +70,13 @@ def main() :
 #scraping   
 def get_umsik(url : str):
     options = Options()
-    options.headless = True
-    browser = webdriver.Chrome(executable_path="./chromedriver.exe", options=options)
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+
+    # browser = webdriver.Chrome(ChromeDriverManager().install())
+    # browser = webdriver.Chrome(executable_path="/usr/bin/chromedriver.exe", options=options)
+    browser = webdriver.Chrome(options=options)
     browser.get(url)
     time.sleep(3)
     html = browser.page_source
