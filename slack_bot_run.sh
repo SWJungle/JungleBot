@@ -2,6 +2,6 @@
 #!/usr/bin/env python3
 PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
 
-source /Users/eunjin/opt/anaconda3/etc/profile.d/conda.sh
+source /Users/Sunio/anaconda3/etc/profile.d/conda.sh
 conda activate crawling_env
-python3 /Users/eunjin/Documents/slack_iphone11_bot.py
+python3 /Users/Sunio/Desktop/JungleBot/jungle-bot.py
