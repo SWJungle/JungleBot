@@ -11,7 +11,7 @@ page = requests
 def main() :
     print('check your request..')
     ## webhook url
-    webhook_url = "webhook url"
+    webhook_url = "webhook-url"
     moonjicam_url = "https://www.kaist.ac.kr/kr/html/campus/053001.html?dvs_cd=icc"
     text = "Jungle Bot Text."
     title, breakfast, lunch, dinner = get_umsik(moonjicam_url)    
