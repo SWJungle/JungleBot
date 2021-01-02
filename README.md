@@ -1,8 +1,8 @@
 # JungleBot
 ## tools & skills
-`slack`, `webhook`, `python`, `crontab`, `AWS`
+`slack`, `webhook`, `python`, `crontab`, `AWS`, `BeautifulSoup`, `Celenium`, `Google Web Driver`
 ## goal
-- 카이스트 문지캠퍼스의 일일 식단을 슬랙봇을 활용하여 뿌리기
+- 카이스트 문지캠퍼스의 일일 식단을 스크래핑하여 정글 슬랙에 뿌리기
 - ~~연락처, 링크 등에 대한 자동 응답기~~
 ## contents & result
 20.12.25 ~
